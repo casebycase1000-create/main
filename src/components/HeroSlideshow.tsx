@@ -36,14 +36,6 @@ export function HeroSlideshow({ images, intervalMs = 4000 }: Props) {
     };
   }, [index, intervalMs, paused, next]);
 
-  const handleKey = useCallback(
-    (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft') prev();
-      else if (e.key === 'ArrowRight') next();
-    },
-    [prev, next],
-  );
-
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'ArrowLeft') prev();
     else if (e.key === 'ArrowRight') next();
