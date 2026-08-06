@@ -12,21 +12,21 @@ const SLIDESHOW_IMAGES = [
   { src: 'https://images.pexels.com/photos/10475771/pexels-photo-10475771.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Audi R8', sub: 'Virtual Cockpit' },
   { src: 'https://images.pexels.com/photos/29293963/pexels-photo-29293963.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'VW Golf GTI MK7', sub: 'Digital Dashboard + CarPlay' },
   { src: 'https://images.pexels.com/photos/11526276/pexels-photo-11526276.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Audi Q5', sub: 'Premium Digital Cockpit' },
-  { src: 'https://images.pexels.com/photos/12870231/pexels-photo-12870231.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'VW Golf MK7', sub: 'Active Info Display' },
-  { src: 'https://images.pexels.com/photos/34404460/pexels-photo-34404460.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Audi A4', sub: 'Virtual Cockpit + Infotainment' },
-  { src: 'https://images.pexels.com/photos/37685712/pexels-photo-37685712.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'VW Golf R', sub: 'Digital Cluster — Sport Mode' },
-  { src: 'https://images.pexels.com/photos/9452196/pexels-photo-9452196.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Audi A3', sub: 'Digital Dashboard' },
+  { src: 'https://images.pexels.com/photos/37685712/pexels-photo-37685712.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'VW Golf MK7', sub: 'Active Info Display' },
+  { src: 'https://images.pexels.com/photos/4227723/pexels-photo-4227723.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Digital Cluster', sub: 'Illuminated gauges close-up' },
+  { src: 'https://images.pexels.com/photos/15394303/pexels-photo-15394303.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Digital Dashboard', sub: 'Night mode instrument cluster' },
+  { src: 'https://images.pexels.com/photos/23533488/pexels-photo-23533488.jpeg?auto=compress&cs=tinysrgb&w=700&h=900&dpr=2', label: 'Digital Cluster', sub: 'Speedometer & tachometer close-up' },
 ];
 
-const BEFORE_VW = 'https://images.pexels.com/photos/15256366/pexels-photo-15256366.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
+const BEFORE_VW = 'https://images.pexels.com/photos/226457/pexels-photo-226457.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 const AFTER_VW = 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 const BEFORE_AUDI = 'https://images.pexels.com/photos/16520978/pexels-photo-16520978.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 const AFTER_AUDI = 'https://images.pexels.com/photos/10475771/pexels-photo-10475771.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 
-const CLUSTER_BEFORE = 'https://images.pexels.com/photos/15256366/pexels-photo-15256366.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const CLUSTER_BEFORE = 'https://images.pexels.com/photos/226457/pexels-photo-226457.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
 const CLUSTER_AFTER = 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
-const CARPLAY_IMG = 'https://images.pexels.com/photos/20653991/pexels-photo-20653991.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
-const BUNDLE_IMG = 'https://images.pexels.com/photos/34404460/pexels-photo-34404460.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const CARPLAY_IMG = 'https://images.pexels.com/photos/15394303/pexels-photo-15394303.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const BUNDLE_IMG = 'https://images.pexels.com/photos/4227723/pexels-photo-4227723.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
 const MFSW_IMG = 'https://images.pexels.com/photos/28743952/pexels-photo-28743952.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
 const FLAGSHIP_IMG = 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=900&h=700&dpr=2';
 

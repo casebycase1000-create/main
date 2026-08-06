@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface SlideImage {
   src: string;
@@ -13,19 +14,54 @@ interface Props {
 
 export function HeroSlideshow({ images, intervalMs = 4000 }: Props) {
   const [index, setIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
   const timerRef = useRef<number | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
+  const next = useCallback(() => {
+    setIndex((i) => (i + 1) % images.length);
+  }, [images.length]);
+
+  const prev = useCallback(() => {
+    setIndex((i) => (i - 1 + images.length) % images.length);
+  }, [images.length]);
 
   useEffect(() => {
+    if (paused) return;
     timerRef.current = window.setTimeout(() => {
-      setIndex((i) => (i + 1) % images.length);
+      next();
     }, intervalMs);
     return () => {
       if (timerRef.current) window.clearTimeout(timerRef.current);
     };
-  }, [index, intervalMs]);
+  }, [index, intervalMs, paused, next]);
+
+  const handleKey = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') prev();
+      else if (e.key === 'ArrowRight') next();
+    },
+    [prev, next],
+  );
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') prev();
+    else if (e.key === 'ArrowRight') next();
+  };
 
   return (
-    <div className="relative h-[380px] overflow-hidden rounded-2xl sm:h-[480px] lg:h-[600px]">
+    <div
+      ref={containerRef}
+      tabIndex={0}
+      role="region"
+      aria-label="Image slideshow"
+      className="group relative h-[380px] overflow-hidden rounded-2xl sm:h-[480px] lg:h-[600px]"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onKeyDown={onKeyDown}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
+    >
       {images.map((img, i) => (
         <div
           key={i}
@@ -50,6 +86,25 @@ export function HeroSlideshow({ images, intervalMs = 4000 }: Props) {
         </div>
       ))}
 
+      {/* Arrow buttons — show on hover/focus */}
+      <button
+        type="button"
+        onClick={prev}
+        aria-label="Previous slide"
+        className="absolute left-3 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/40 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 group-hover:opacity-100"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        type="button"
+        onClick={next}
+        aria-label="Next slide"
+        className="absolute right-3 top-1/2 z-20 grid h-10 w-10 -translate-y-1/2 place-items-center rounded-full border border-white/20 bg-black/40 text-white opacity-0 backdrop-blur-sm transition-all duration-300 hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent-400 group-hover:opacity-100"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      {/* Dots */}
       <div className="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 gap-1.5">
         {images.map((_, i) => (
           <button

@@ -1,7 +1,7 @@
 import { BeforeAfterSlider } from '@/components/BeforeAfterSlider';
 import { Contact, Footer } from '@/components/Contact';
 
-const BEFORE_VW = 'https://images.pexels.com/photos/15256366/pexels-photo-15256366.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
+const BEFORE_VW = 'https://images.pexels.com/photos/226457/pexels-photo-226457.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 const AFTER_VW = 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 const BEFORE_AUDI = 'https://images.pexels.com/photos/16520978/pexels-photo-16520978.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';
 const AFTER_AUDI = 'https://images.pexels.com/photos/10475771/pexels-photo-10475771.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&dpr=2';

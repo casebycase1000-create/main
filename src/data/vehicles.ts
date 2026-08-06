@@ -95,11 +95,11 @@ export interface RecentInstall {
 
 export const RECENT_INSTALLS: RecentInstall[] = [
   { vehicle: 'VW Golf R MK7', service: 'Digital Cluster + CarPlay', category: 'Bundle', date: 'Aug 2025', image: 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
-  { vehicle: 'Audi A4', service: 'Digital Cluster', category: 'Digital Cluster', date: 'Aug 2025', image: 'https://images.pexels.com/photos/10475771/pexels-photo-10475771.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
+  { vehicle: 'Audi R8', service: 'Digital Cluster', category: 'Digital Cluster', date: 'Aug 2025', image: 'https://images.pexels.com/photos/10475771/pexels-photo-10475771.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
   { vehicle: 'VW GTI MK7', service: 'Apple CarPlay', category: 'CarPlay', date: 'Jul 2025', image: 'https://images.pexels.com/photos/29293963/pexels-photo-29293963.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
   { vehicle: 'Audi Q5', service: 'Digital Cluster', category: 'Digital Cluster', date: 'Jul 2025', image: 'https://images.pexels.com/photos/11526276/pexels-photo-11526276.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
-  { vehicle: 'VW Golf Sportwagen', service: 'Cluster + MFSW', category: 'Bundle', date: 'Jun 2025', image: 'https://images.pexels.com/photos/12870231/pexels-photo-12870231.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
-  { vehicle: 'Audi A3', service: 'Digital Cluster', category: 'Digital Cluster', date: 'Jun 2025', image: 'https://images.pexels.com/photos/9452196/pexels-photo-9452196.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
+  { vehicle: 'VW Golf MK7', service: 'Cluster + MFSW', category: 'Bundle', date: 'Jun 2025', image: 'https://images.pexels.com/photos/37685712/pexels-photo-37685712.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
+  { vehicle: 'Audi A4', service: 'Digital Cluster', category: 'Digital Cluster', date: 'Jun 2025', image: 'https://images.pexels.com/photos/4227723/pexels-photo-4227723.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2' },
 ];
 
 export interface Review {

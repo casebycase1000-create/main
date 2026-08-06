@@ -2,10 +2,10 @@ import { ArrowRight, Check, Gauge, Smartphone, Package, CircleDot, PackageCheck,
 import { Link } from 'react-router-dom';
 import { Contact, Footer } from '@/components/Contact';
 
-const CLUSTER_BEFORE = 'https://images.pexels.com/photos/15256366/pexels-photo-15256366.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const CLUSTER_BEFORE = 'https://images.pexels.com/photos/226457/pexels-photo-226457.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
 const CLUSTER_AFTER = 'https://images.pexels.com/photos/28743959/pexels-photo-28743959.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
-const CARPLAY_IMG = 'https://images.pexels.com/photos/20653991/pexels-photo-20653991.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
-const BUNDLE_IMG = 'https://images.pexels.com/photos/34404460/pexels-photo-34404460.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const CARPLAY_IMG = 'https://images.pexels.com/photos/15394303/pexels-photo-15394303.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
+const BUNDLE_IMG = 'https://images.pexels.com/photos/4227723/pexels-photo-4227723.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
 const MFSW_IMG = 'https://images.pexels.com/photos/28743952/pexels-photo-28743952.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2';
 
 const SERVICES = [
@@ -59,7 +59,7 @@ export default function ServicesPage() {
     <main className="pt-20">
       <section className="py-16 lg:py-24">
         <div className="container-edge section-pad-x">
-          <div className="max-w-2xl">
+          <div className="mx-auto max-w-2xl text-center">
             <p className="eyebrow">Our Services</p>
             <h1 className="mt-3 font-display text-4xl font-bold tracking-tight text-white sm:text-5xl">Precision upgrades for your cockpit</h1>
             <p className="mt-4 text-lg text-neutral-400">Atlanta's best dashboard work for VAG vehicles. From CarPlay to full digital cluster conversions and multifunction steering wheels — everything we do is OEM-spec and mobile-installed.</p>

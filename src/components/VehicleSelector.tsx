@@ -12,12 +12,16 @@ const PACKAGES: { id: PackageId; label: string; icon: typeof Gauge; price: strin
 ];
 
 function VWLogo({ className = '' }: { className?: string }) {
+  // Accurate VW mark: ring + interlocking V above W
+  // V: two strokes meeting at bottom center, from upper-left and upper-right to center-bottom
+  // W: four strokes forming the W, bottom of the W sits on the V's vertex
   return (
     <svg viewBox="0 0 100 100" className={className} aria-label="Volkswagen" role="img" fill="none">
-      <circle cx="50" cy="50" r="44" stroke="currentColor" strokeWidth="5" />
-      <path d="M50 8 L50 92" stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
-      <path d="M30 30 L50 60 L70 30" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-      <path d="M30 70 L50 40 L70 70" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <circle cx="50" cy="50" r="46" stroke="currentColor" strokeWidth="4" />
+      {/* V — upper letter, from ~25,28 and ~75,28 converging at 50,56 */}
+      <path d="M26 28 L50 58 L74 28" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+      {/* W — lower letter, four segments: 32,72→40,42→50,62→60,42→68,72 */}
+      <path d="M32 72 L40 42 L50 62 L60 42 L68 72" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }
