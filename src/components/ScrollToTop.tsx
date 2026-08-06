@@ -6,18 +6,24 @@ export function ScrollToTop() {
 
   useEffect(() => {
     if (hash) {
+      let attempts = 0;
+      const maxAttempts = 10;
       const scrollToEl = () => {
-        const el = document.querySelector(hash);
+        const el = document.getElementById(hash.replace('#', ''));
         if (el) {
-          el.scrollIntoView({ behavior: 'smooth' });
+          el.scrollIntoView({ block: 'start' });
           return true;
         }
         return false;
       };
-      if (!scrollToEl()) {
-        const t = window.setTimeout(scrollToEl, 120);
-        return () => window.clearTimeout(t);
-      }
+      if (scrollToEl()) return;
+      const interval = window.setInterval(() => {
+        attempts++;
+        if (scrollToEl() || attempts >= maxAttempts) {
+          window.clearInterval(interval);
+        }
+      }, 100);
+      return () => window.clearInterval(interval);
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
     }
