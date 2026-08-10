@@ -33,7 +33,7 @@ export function Navbar() {
   useEffect(() => { setOpen(false); }, [location.pathname]);
 
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'border-b border-neutral-800/70 bg-[#08080f]/80 backdrop-blur-xl' : 'border-b border-transparent bg-transparent'}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${scrolled ? 'border-b border-neutral-800/70 bg-[#08080f]/80 backdrop-blur-xl dark:border-neutral-800/70 dark:bg-[#08080f]/80 light:border-neutral-200 light:bg-neutral-50/80' : 'border-b border-transparent bg-transparent'}`}>
       <nav className="container-edge section-pad-x flex h-16 items-center justify-between gap-4 lg:h-[72px]">
         <Link to="/" aria-label="DashForge home" className="shrink-0"><Logo /></Link>
 

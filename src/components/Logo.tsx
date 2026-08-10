@@ -65,7 +65,7 @@ export function Logo({ className = '' }: { className?: string }) {
         />
       </span>
       <span className="font-display text-lg font-extrabold tracking-tight">
-        <span className="text-white">Dash</span>
+        <span className="text-white light:text-neutral-900">Dash</span>
         <span className="text-accent-400">Forge</span>
       </span>
     </span>
