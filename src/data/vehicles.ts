@@ -83,6 +83,7 @@ export const DISPLAY_THEMES: DisplayTheme[] = [
   { name: 'Dynamic / S-Line', desc: 'Navigation-integrated view with turn-by-turn and media.', brand: 'Audi S-Line' },
   { name: 'RS', desc: 'RS-specific layout with shift lights and lap data.', brand: 'Audi RS' },
   { name: 'Sport Rainbow', desc: 'Audi-exclusive rainbow tachometer — vibrant multi-color RPM sweep.', brand: 'Audi' },
+  { name: 'Off-Road', desc: 'Rugged layout with compass, altitude, and pitch for SUV and crossover models.', brand: 'VW & Audi' },
 ];
 
 export interface RecentInstall {

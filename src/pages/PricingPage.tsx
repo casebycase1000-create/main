@@ -1,7 +1,8 @@
-import { ArrowRight, Check, Star } from 'lucide-react';
+import { ArrowRight, Check } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { PRICING_TIERS } from '@/data/vehicles';
 import { Contact, Footer } from '@/components/Contact';
+import { useBooking } from '@/context/BookingContext';
 
 const MOBILE_FEES = [
   { value: 'Free', label: 'First 20 miles from Cumberland — covers most of Atlanta.' },
@@ -10,6 +11,20 @@ const MOBILE_FEES = [
 ];
 
 export default function PricingPage() {
+  const { setSelection } = useBooking();
+
+  const handleBook = (tier: typeof PRICING_TIERS[number]) => {
+    const serviceMap: Record<string, string> = {
+      'cluster': 'cluster',
+      'carplay': 'carplay',
+      'bundle': 'bundle',
+    };
+    setSelection({
+      packageName: tier.name,
+      service: serviceMap[tier.id] ?? tier.id,
+    });
+  };
+
   return (
     <main className="pt-20">
       <section className="py-16 lg:py-24">
@@ -26,7 +41,8 @@ export default function PricingPage() {
                 {t.popular && <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent-600 px-3 py-1 text-xs font-semibold text-white shadow-lg">Most Popular</span>}
                 <h3 className="font-display text-base font-bold text-white">{t.name}</h3>
                 <p className="mt-1 text-xs text-neutral-500">{t.tagline}</p>
-                <div className="mt-4 flex items-baseline gap-1.5">
+                {/* Price aligned in a consistent-height row */}
+                <div className="mt-4 flex min-h-[44px] items-baseline gap-1.5">
                   {t.oldPrice && <span className="text-lg text-neutral-500 line-through">{t.oldPrice}</span>}
                   <span className="font-display text-3xl font-extrabold text-white">{t.price}</span>
                   {t.priceNote && <span className="text-xs text-neutral-500">{t.priceNote}</span>}
@@ -34,7 +50,7 @@ export default function PricingPage() {
                 <ul className="mt-5 space-y-2.5">
                   {t.features.map((f) => <li key={f} className="flex items-start gap-2.5 text-xs text-neutral-300"><span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-accent-500/20 text-accent-400"><Check className="h-3 w-3" /></span>{f}</li>)}
                 </ul>
-                <Link to="/#contact" className={`mt-6 ${t.popular ? 'btn-primary' : 'btn-secondary'} !py-2.5 !text-sm`}>{t.cta}<ArrowRight className="h-4 w-4" /></Link>
+                <Link to="/#contact" onClick={() => handleBook(t)} className={`mt-6 ${t.popular ? 'btn-primary' : 'btn-secondary'} !py-2.5 !text-sm`}>{t.cta}<ArrowRight className="h-4 w-4" /></Link>
               </div>
             ))}
           </div>

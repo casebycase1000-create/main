@@ -1,6 +1,8 @@
 import { useMemo, useState } from 'react';
 import { Check, ChevronDown, Clock, ArrowRight, X, CircleAlert as AlertCircle, CircleCheck as CheckCircle2, Gauge, Smartphone, Disc3 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { BRANDS, VEHICLES, getVehicleData, type BrandId, type VehicleModel } from '@/data/vehicles';
+import { useBooking } from '@/context/BookingContext';
 
 type PackageId = 'cluster' | 'carplay' | 'bundle' | 'bundle-mfsw';
 
@@ -12,27 +14,24 @@ const PACKAGES: { id: PackageId; label: string; icon: typeof Gauge; price: strin
 ];
 
 function VWLogo({ className = '' }: { className?: string }) {
-  // Accurate VW mark: ring + interlocking V above W
-  // V: two strokes meeting at bottom center, from upper-left and upper-right to center-bottom
-  // W: four strokes forming the W, bottom of the W sits on the V's vertex
+  // Official VW 2020 flat emblem — traced from volkswagen.de source (Wikimedia Commons)
+  // Path data extracted from the official SVG, viewBox 0 0 1024 1024
   return (
-    <svg viewBox="0 0 100 100" className={className} aria-label="Volkswagen" role="img" fill="none">
-      <circle cx="50" cy="50" r="46" stroke="currentColor" strokeWidth="4" />
-      {/* V — upper letter, from ~25,28 and ~75,28 converging at 50,56 */}
-      <path d="M26 28 L50 58 L74 28" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-      {/* W — lower letter, four segments: 32,72→40,42→50,62→60,42→68,72 */}
-      <path d="M32 72 L40 42 L50 62 L60 42 L68 72" stroke="currentColor" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+    <svg viewBox="0 0 1024 1024" className={className} aria-label="Volkswagen" role="img" fill="currentColor">
+      <g transform="matrix(10.188387870788574, 0, 0, 10.188387870788574, -251.519936680809, -252.79260253906244)">
+        <path d="M75,120.4c-24.9,0-45.3-20.5-45.3-45.4c0-5.6,1-10.9,2.9-15.9l26.5,53.3c0.3,0.7,0.8,1.3,1.6,1.3c0.8,0,1.3-0.6,1.6-1.3l12.2-27.3c0.1-0.3,0.3-0.6,0.6-0.6s0.4,0.3,0.6,0.6l12.2,27.3c0.3,0.7,0.8,1.3,1.6,1.3c0.8,0,1.3-0.6,1.6-1.3l26.5-53.3c1.9,5,2.9,10.3,2.9,15.9C120.3,99.9,99.9,120.4,75,120.4z M75,64.7c-0.3,0-0.4-0.3-0.6-0.6l-14.2-32c4.6-1.7,9.6-2.6,14.8-2.6c5.2,0,10.2,0.9,14.8,2.6l-14.2,32C75.4,64.5,75.3,64.7,75,64.7z M60.5,97.6c-0.3,0-0.4-0.3-0.6-0.6l-23-46.4c4.1-6.3,9.6-11.6,16.3-15.3l16.6,36.9C70,72.8,70.5,73,71,73h8c0.6,0,1-0.1,1.3-0.8l16.6-36.9c6.6,3.7,12.2,9,16.3,15.3L90,97c-0.1,0.3-0.3,0.6-0.6,0.6c-0.3,0-0.4-0.3-0.6-0.6l-8.7-19.8c-0.3-0.7-0.7-0.8-1.3-0.8h-8c-0.6,0-1,0.1-1.3,0.8L61.1,97C61,97.3,60.8,97.6,60.5,97.6z M75,125c27.7,0,50-22.3,50-50c0-27.7-22.3-50-50-50c-27.7,0-50,22.3-50,50C25,102.7,47.3,125,75,125z" />
+      </g>
     </svg>
   );
 }
 
 function AudiLogo({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 120 60" className={className} aria-label="Audi" role="img" fill="none">
-      <circle cx="18" cy="30" r="14" stroke="currentColor" strokeWidth="3.5" />
-      <circle cx="42" cy="30" r="14" stroke="currentColor" strokeWidth="3.5" />
-      <circle cx="66" cy="30" r="14" stroke="currentColor" strokeWidth="3.5" />
-      <circle cx="90" cy="30" r="14" stroke="currentColor" strokeWidth="3.5" />
+    <svg viewBox="0 0 120 60" className={className} aria-label="Audi" role="img" fill="none" stroke="currentColor" strokeWidth="3.5">
+      <circle cx="18" cy="30" r="14" />
+      <circle cx="42" cy="30" r="14" />
+      <circle cx="66" cy="30" r="14" />
+      <circle cx="90" cy="30" r="14" />
     </svg>
   );
 }
@@ -42,6 +41,7 @@ function BrandMark({ brand, className = '' }: { brand: BrandId; className?: stri
 }
 
 export function VehicleSelector() {
+  const { setSelection } = useBooking();
   const [brand, setBrand] = useState<BrandId | null>(null);
   const [model, setModel] = useState<VehicleModel | null>(null);
   const [modelOpen, setModelOpen] = useState(false);
@@ -51,6 +51,18 @@ export function VehicleSelector() {
   const result = useMemo(() => (brand && model ? getVehicleData(brand, model) : null), [brand, model]);
 
   const reset = () => { setBrand(null); setModel(null); setModelOpen(false); setPkg(null); };
+
+  const handleGetQuote = () => {
+    if (!brand || !model || !pkg) return;
+    const brandName = BRANDS.find((b) => b.id === brand)?.name ?? brand;
+    const pkgLabel = PACKAGES.find((p) => p.id === pkg)?.label ?? '';
+    setSelection({
+      brand: brandName,
+      model: `${model.name} (${model.years})`,
+      packageName: pkgLabel,
+      service: pkg,
+    });
+  };
 
   return (
     <section id="vehicles" className="py-20 lg:py-28">
@@ -123,7 +135,7 @@ export function VehicleSelector() {
                     <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Starting at</p>
                     <p className="font-display text-3xl font-extrabold text-white">{result.startingPrice ? `$${result.startingPrice.toLocaleString()}` : 'Custom'}</p>
                     <div className="mt-4 flex gap-2 lg:justify-end">
-                      <a href={pkg ? '#contact' : '#vehicles'} onClick={(e) => { if (!pkg) { e.preventDefault(); alert('Please select a package first.'); } }} className={`btn-primary !py-3 ${!pkg ? 'pointer-events-none opacity-50' : ''}`}>{pkg ? 'Get Quote' : 'Select a Package'}<ArrowRight className="h-4 w-4" /></a>
+                      <Link to="/#contact" onClick={handleGetQuote} className={`btn-primary !py-3 ${!pkg ? 'pointer-events-none opacity-50' : ''}`}>{pkg ? 'Get Quote' : 'Select a Package'}<ArrowRight className="h-4 w-4" /></Link>
                     </div>
                   </div>
                 </div>

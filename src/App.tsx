@@ -5,7 +5,6 @@ import { ScrollToTop } from '@/components/ScrollToTop';
 import { PageTransition } from '@/components/PageTransition';
 import { AmbientBackground } from '@/components/AmbientBackground';
 import { BookingProvider } from '@/context/BookingContext';
-import { ThemeProvider } from '@/context/ThemeContext';
 import HomePage from '@/pages/HomePage';
 import ServicesPage from '@/pages/ServicesPage';
 import VehiclesPage from '@/pages/VehiclesPage';
@@ -14,27 +13,24 @@ import PricingPage from '@/pages/PricingPage';
 
 export default function App() {
   return (
-    <ThemeProvider>
     <BookingProvider>
-    <BrowserRouter>
-      <ScrollToTop />
-      <div className="relative min-h-screen bg-[#08080f] text-neutral-300">
-        <AmbientBackground />
-        <Navbar />
-        <PageTransition>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services" element={<ServicesPage />} />
-            <Route path="/vehicles" element={<VehiclesPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/pricing" element={<PricingPage />} />
-          </Routes>
-        </PageTransition>
-        <ChatButton />
-      </div>
-    </BrowserRouter>
+        <BrowserRouter>
+          <ScrollToTop />
+          <div className="relative min-h-screen bg-[#08080f] text-neutral-300 dark:bg-[#08080f] dark:text-neutral-300 light:bg-neutral-50 light:text-neutral-700">
+            <AmbientBackground />
+            <Navbar />
+            <PageTransition>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/services" element={<ServicesPage />} />
+                <Route path="/vehicles" element={<VehiclesPage />} />
+                <Route path="/gallery" element={<GalleryPage />} />
+                <Route path="/pricing" element={<PricingPage />} />
+              </Routes>
+            </PageTransition>
+            <ChatButton />
+          </div>
+        </BrowserRouter>
+      </BookingProvider>
   );
-}
-
-  )
 }

@@ -6,12 +6,18 @@
   :root {
     color-scheme: dark;
   }
+  html.light {
+    color-scheme: light;
+  }
   html {
     -webkit-text-size-adjust: 100%;
   }
   body {
     @apply bg-[#08080f] text-neutral-300 antialiased;
     font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+  html.light body {
+    @apply bg-neutral-50 text-neutral-700;
   }
   ::selection {
     @apply bg-accent-500/25;
@@ -25,6 +31,9 @@
   }
   ::-webkit-scrollbar-thumb {
     @apply bg-neutral-700 rounded-full;
+  }
+  html.light ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-300;
   }
 }
 
@@ -44,11 +53,20 @@
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-neutral-700/60 bg-neutral-900/40 px-6 py-3.5 text-sm font-medium tracking-wide text-neutral-200 backdrop-blur-sm transition-all duration-300 hover:border-neutral-600 hover:bg-neutral-800/60 hover:text-white active:scale-[0.98];
   }
+  html.light .btn-secondary {
+    @apply border-neutral-300 bg-white/60 text-neutral-700 hover:border-neutral-400 hover:bg-white hover:text-neutral-900;
+  }
   .btn-ghost {
     @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium text-neutral-400 transition-colors hover:text-white;
   }
+  html.light .btn-ghost {
+    @apply text-neutral-500 hover:text-neutral-900;
+  }
   .card {
     @apply rounded-3xl border border-neutral-800/80 bg-neutral-900/50 p-7 transition-all duration-300 hover:border-neutral-700/80;
+  }
+  html.light .card {
+    @apply border-neutral-200 bg-white shadow-sm hover:border-neutral-300;
   }
   .chip {
     @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium;
@@ -56,10 +74,53 @@
   .input-field {
     @apply w-full rounded-xl border border-neutral-700 bg-neutral-900/60 px-4 py-3 text-sm text-neutral-100 placeholder:text-neutral-500 transition-colors focus:border-accent-500 focus:outline-none focus:ring-2 focus:ring-accent-500/20;
   }
+  html.light .input-field {
+    @apply border-neutral-300 bg-white text-neutral-900 placeholder:text-neutral-400 focus:border-accent-500 focus:ring-accent-500/20;
+  }
   .eyebrow {
     @apply text-xs font-semibold uppercase tracking-[0.18em] text-accent-400;
   }
 }
+
+/* ---- Light mode utility overrides ---- */
+html.light .text-white { @apply text-neutral-900; }
+html.light .text-neutral-200 { @apply text-neutral-800; }
+html.light .text-neutral-300 { @apply text-neutral-700; }
+html.light .text-neutral-400 { @apply text-neutral-600; }
+html.light .text-neutral-500 { @apply text-neutral-500; }
+
+html.light .bg-neutral-900\/50 { @apply bg-white/70; }
+html.light .bg-neutral-900\/60 { @apply bg-white/80; }
+html.light .bg-neutral-900 { @apply bg-white; }
+
+html.light .border-neutral-800 { @apply border-neutral-200; }
+html.light .border-neutral-800\/80 { @apply border-neutral-200; }
+html.light .border-neutral-800\/70 { @apply border-neutral-200; }
+html.light .border-neutral-700 { @apply border-neutral-300; }
+html.light .border-neutral-700\/80 { @apply border-neutral-300; }
+html.light .border-neutral-700\/60 { @apply border-neutral-300; }
+
+html.light .bg-neutral-800\/40 { @apply bg-neutral-100; }
+html.light .bg-neutral-800\/50 { @apply bg-neutral-100; }
+html.light .bg-neutral-800\/60 { @apply bg-neutral-100; }
+html.light .bg-neutral-800 { @apply bg-neutral-200; }
+html.light .hover\:bg-neutral-800\/40:hover { @apply bg-neutral-100; }
+html.light .hover\:bg-neutral-800\/60:hover { @apply bg-neutral-100; }
+html.light .hover\:border-neutral-700:hover { @apply border-neutral-400; }
+html.light .hover\:border-neutral-600:hover { @apply border-neutral-400; }
+html.light .hover\:border-neutral-700\/80:hover { @apply border-neutral-400; }
+
+html.light .bg-\[\#08080f\] { @apply bg-neutral-50; }
+html.light .bg-\[\#08080f\]\/80 { @apply bg-neutral-50/80; }
+html.light .bg-\[\#08080f\]\/95 { @apply bg-neutral-50/95; }
+html.light .border-neutral-900 { @apply border-neutral-200; }
+
+html.light .from-neutral-900 { @apply from-neutral-100; }
+html.light .via-neutral-900 { @apply via-neutral-100; }
+html.light .to-neutral-900 { @apply to-neutral-100; }
+
+html.light .bg-neutral-700 { @apply bg-neutral-300; }
+html.light .text-neutral-600 { @apply text-neutral-400; }
 
 /* Logo sweep shimmer */
 @keyframes sweep {
