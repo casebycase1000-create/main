@@ -4,6 +4,8 @@ import { ChatButton } from '@/components/ChatButton';
 import { ScrollToTop } from '@/components/ScrollToTop';
 import { PageTransition } from '@/components/PageTransition';
 import { AmbientBackground } from '@/components/AmbientBackground';
+import { BookingProvider } from '@/context/BookingContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 import HomePage from '@/pages/HomePage';
 import ServicesPage from '@/pages/ServicesPage';
 import VehiclesPage from '@/pages/VehiclesPage';
@@ -12,6 +14,8 @@ import PricingPage from '@/pages/PricingPage';
 
 export default function App() {
   return (
+    <ThemeProvider>
+    <BookingProvider>
     <BrowserRouter>
       <ScrollToTop />
       <div className="relative min-h-screen bg-[#08080f] text-neutral-300">
@@ -30,4 +34,7 @@ export default function App() {
       </div>
     </BrowserRouter>
   );
+}
+
+  )
 }
