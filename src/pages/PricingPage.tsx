@@ -68,7 +68,7 @@ export default function PricingPage() {
           <div className="mx-auto max-w-2xl text-center">
             <p className="eyebrow">Mobile Service Fees</p>
             <h2 className="mt-3 font-display text-3xl font-bold tracking-tight text-white sm:text-4xl">We come to you</h2>
-            <p className="mt-4 text-lg text-neutral-400">Based in Cumberland, GA. Simple distance-based travel pricing.</p>
+            <p className="mt-4 text-lg text-neutral-400">Based in Cumberland, Atlanta, GA. Simple distance-based travel pricing.</p>
           </div>
           <div className="mt-12 grid gap-4 sm:grid-cols-3">
             {MOBILE_FEES.map((f) => (

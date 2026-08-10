@@ -39,7 +39,7 @@ function getReply(input: string): string {
   }
 
   if (/(miles|mobile|come to|location|where|area|drive|travel|cumberland|marietta|atlanta|kennesaw|smyrna)/.test(q)) {
-    return 'We\'re based in Cumberland, GA and serve the greater Atlanta area. The first 20 miles are free, and it\'s $50 beyond that. We come to your home or office — no shop visit needed.';
+    return 'We\'re based in Cumberland, Atlanta, GA and serve the greater Atlanta area. The first 20 miles are free, and it\'s $50 beyond that. We come to your home or office — no shop visit needed.';
   }
 
   if (/(warranty|guarantee)/.test(q)) {

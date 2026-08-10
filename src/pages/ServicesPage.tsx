@@ -118,7 +118,7 @@ export default function ServicesPage() {
                 <div className="mt-6 flex flex-wrap items-center gap-3">
                   <Link to="/#contact" onClick={() => handleBook(s)} className="btn-primary !py-2.5 !text-sm">{s.btn}<ArrowRight className="h-4 w-4" /></Link>
                   {canBuy && (
-                    <Link to="/#contact" onClick={() => handleBook(s)} className="btn-secondary !py-2.5 !text-sm"><ShoppingCart className="h-4 w-4" />Buy ${s.price}</Link>
+                    <Link to="/#contact" onClick={() => handleBook(s)} className="btn-secondary !py-2.5 !text-sm"><ShoppingCart className="h-4 w-4" />Buy {s.price}</Link>
                   )}
                 </div>
 

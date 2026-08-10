@@ -163,7 +163,7 @@ export function Contact() {
 
         <div className="mx-auto mt-8 flex max-w-3xl items-center justify-center gap-2 text-sm text-neutral-500">
           <MapPin className="h-4 w-4 text-accent-400" />
-          <span>Based in Cumberland, GA · Serving the greater Atlanta area · First 20 miles free</span>
+          <span>Based in Cumberland, Atlanta, GA · Serving the greater Atlanta area · First 20 miles free</span>
         </div>
       </div>
     </section>
@@ -181,7 +181,7 @@ export function Footer() {
         <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
           <div className="text-center sm:text-left">
             <p className="font-display text-lg font-extrabold tracking-tight text-white">Dash<span className="text-accent-400">Forge</span></p>
-            <p className="mt-1 text-sm text-neutral-500">Mobile automotive specialist · Cumberland, GA</p>
+            <p className="mt-1 text-sm text-neutral-500">Mobile automotive specialist · Cumberland, Atlanta, GA</p>
           </div>
           <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm">
             <Link to="/services" className="text-neutral-500 hover:text-accent-400">Services</Link>

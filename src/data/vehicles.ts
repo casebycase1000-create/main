@@ -127,7 +127,7 @@ export interface FAQItem {
 
 export const FAQS: FAQItem[] = [
   { q: 'How long does a digital cluster install take?', a: 'In-stock vehicles (MK6/MK7 Golf family, Audi A3/A4/Q5 2014–2020) take 2–3 days for VIN programming. The on-site install at your location is done in a few hours. Special order vehicles take 1–2 weeks.' },
-  { q: 'Do you come to me?', a: 'Yes — we are a mobile service based in Cumberland, GA. We come to your home or office across the Atlanta area. The first 20 miles are free, and it is a flat $50 fee beyond that.' },
+  { q: 'Do you come to me?', a: 'Yes — we are a mobile service based in Cumberland, Atlanta, GA. We come to your home or office across the Atlanta area. The first 20 miles are free, and it is a flat $50 fee beyond that.' },
   { q: 'Is my vehicle compatible?', a: 'MK6 and MK7 Golf, GTI, Golf R, Golf Sportwagen, and Jetta Sportwagen are all in stock. Audi A3, A4, and Q5 (2014–2020) are also in stock. Most other VW and Audi models from 2012+ are available as special orders. Use our compatibility checker to confirm.' },
   { q: 'What warranty do you offer?', a: 'Every install is backed by a 30-day warranty on all parts and labor. If something fails within 30 days, we return and fix it free of charge.' },
   { q: 'Why is VIN programming needed?', a: 'Volkswagen and Audi clusters are coded to the vehicle identification number. Generic screens will not display correct mileage, warnings, or data. We program each cluster to your exact VIN so everything works as factory — no shortcuts.' },
