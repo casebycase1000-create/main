@@ -1,54 +1,138 @@
 import { useEffect, useRef } from 'react';
 import { useTheme } from '@/context/ThemeContext';
 
+interface Dot {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  r: number;
+  depth: number;
+}
+
 export function AmbientBackground() {
-  const ref = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   const { theme } = useTheme();
   const isLight = theme === 'light';
 
   useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    let dots: Dot[] = [];
+    let scrollY = window.scrollY;
+    let scrollVel = 0;
+    let width = 0;
+    let height = 0;
     let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => {
-        const el = ref.current;
-        if (!el) return;
-        el.style.setProperty('--scroll-px', `${window.scrollY * 0.15}px`);
-      });
-    };
+
+    const AREA = 16000;
+    const MAX_DIST = 130;
+    const MAX_DIST_SQ = MAX_DIST * MAX_DIST;
+    const MAX_SCROLL_PARALLAX = 300;
+
+    function resize() {
+      width = canvas!.clientWidth;
+      height = canvas!.clientHeight;
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas!.width = width * dpr;
+      canvas!.height = height * dpr;
+      ctx!.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.min(120, Math.floor((width * height) / AREA));
+      dots = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.18,
+        vy: (Math.random() - 0.5) * 0.18,
+        r: Math.random() * 1.4 + 0.5,
+        depth: Math.random() * 0.8 + 0.2,
+      }));
+    }
+
+    function onScroll() {
+      const next = window.scrollY;
+      scrollVel = (next - scrollY) * 0.15;
+      scrollY = next;
+    }
+
+    function draw() {
+      ctx!.clearRect(0, 0, width, height);
+
+      const dotColor = isLight ? '26, 26, 26' : '139, 142, 249';
+      const lineColor = isLight ? '26, 26, 26' : '139, 142, 249';
+      const scrollFrac = Math.min(Math.abs(scrollY) / MAX_SCROLL_PARALLAX, 1);
+      const dirSign = scrollY >= 0 ? 1 : -1;
+      const baseShift = scrollFrac * dirSign;
+
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        d.x += d.vx;
+        d.y += d.vy + scrollVel * 0.004 * d.depth;
+
+        if (d.x < -20) d.x = width + 20;
+        if (d.x > width + 20) d.x = -20;
+        if (d.y < -20) d.y = height + 20;
+        if (d.y > height + 20) d.y = -20;
+      }
+
+      for (let i = 0; i < dots.length; i++) {
+        const a = dots[i];
+        for (let j = i + 1; j < dots.length; j++) {
+          const b = dots[j];
+          const dx = a.x - b.x;
+          const dy = a.y - b.y;
+          const distSq = dx * dx + dy * dy;
+          if (distSq < MAX_DIST_SQ) {
+            const alpha = (1 - distSq / MAX_DIST_SQ) * 0.12;
+            ctx!.strokeStyle = `rgba(${lineColor}, ${alpha})`;
+            ctx!.lineWidth = 0.5;
+            ctx!.beginPath();
+            ctx!.moveTo(a.x, a.y);
+            ctx!.lineTo(b.x, b.y);
+            ctx!.stroke();
+          }
+        }
+      }
+
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        const parallax = baseShift * 50 * d.depth;
+        const alpha = 0.12 + d.depth * 0.28;
+        ctx!.fillStyle = `rgba(${dotColor}, ${alpha})`;
+        ctx!.beginPath();
+        ctx!.arc(d.x, d.y + parallax, d.r, 0, Math.PI * 2);
+        ctx!.fill();
+      }
+
+      scrollVel *= 0.9;
+      raf = requestAnimationFrame(draw);
+    }
+
+    resize();
+    window.addEventListener('resize', resize);
     window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(raf); };
-  }, []);
+    raf = requestAnimationFrame(draw);
+
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, [isLight]);
 
   const bgColor = isLight ? '#fafafa' : '#08080f';
-  const gridColor = isLight ? '#000000' : '#ffffff';
-  const vignetteColor = isLight ? '#fafafa' : '#08080f';
+  const vignette = isLight ? 'rgba(250,250,250,0)' : 'rgba(8,8,15,0)';
 
   return (
-    <div ref={ref} className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden" aria-hidden="true">
       <div className="absolute inset-0" style={{ backgroundColor: bgColor }} />
+      <canvas ref={canvasRef} className="absolute inset-0 h-full w-full" />
       <div
-        className="absolute -left-32 -top-32 h-[600px] w-[600px] rounded-full blur-[160px] transition-transform duration-300"
-        style={{ backgroundColor: isLight ? 'rgba(34, 197, 94, 0.06)' : 'rgba(16, 185, 129, 0.08)', transform: 'translate3d(calc(var(--scroll-px, 0px) * 0.5), calc(var(--scroll-px, 0px) * 0.3), 0)' }}
+        className="absolute inset-0"
+        style={{ background: `radial-gradient(ellipse at center, ${vignette} 40%, ${bgColor} 100%)` }}
       />
-      <div
-        className="absolute right-[-10%] top-[20%] h-[500px] w-[500px] rounded-full blur-[150px] transition-transform duration-300"
-        style={{ backgroundColor: isLight ? 'rgba(14, 165, 233, 0.05)' : 'rgba(6, 95, 70, 0.10)', transform: 'translate3d(calc(var(--scroll-px, 0px) * -0.4), calc(var(--scroll-px, 0px) * 0.2), 0)' }}
-      />
-      <div
-        className="absolute bottom-[10%] left-[30%] h-[450px] w-[450px] rounded-full blur-[140px] transition-transform duration-300"
-        style={{ backgroundColor: isLight ? 'rgba(99, 102, 241, 0.04)' : 'rgba(16, 185, 129, 0.06)', transform: 'translate3d(calc(var(--scroll-px, 0px) * 0.3), calc(var(--scroll-px, 0px) * -0.25), 0)' }}
-      />
-      <div
-        className="absolute inset-0 opacity-[0.025] transition-transform duration-300"
-        style={{
-          backgroundImage: `linear-gradient(to right, ${gridColor} 1px, transparent 1px), linear-gradient(to bottom, ${gridColor} 1px, transparent 1px)`,
-          backgroundSize: '64px 64px',
-          transform: 'translateY(calc(var(--scroll-px, 0px) * -0.5))',
-        }}
-      />
-      <div className="absolute inset-0" style={{ background: `radial-gradient(ellipse at center, transparent 40%, ${vignetteColor} 100%)` }} />
     </div>
   );
 }
