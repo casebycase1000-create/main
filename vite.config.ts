@@ -7,9 +7,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     hmr: false,
-    watch: {
-      usePolling: false,
-    },
+    watch: null,
   },
   resolve: {
     alias: {

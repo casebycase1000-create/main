@@ -16,7 +16,7 @@ export default function App() {
     <BookingProvider>
         <BrowserRouter>
           <ScrollToTop />
-          <div className="relative min-h-screen bg-[#08080f] text-neutral-300 dark:bg-[#08080f] dark:text-neutral-300 light:bg-neutral-50 light:text-neutral-700">
+          <div className="relative min-h-screen text-neutral-300 dark:text-neutral-300 light:text-neutral-700">
             <AmbientBackground />
             <Navbar />
             <PageTransition>

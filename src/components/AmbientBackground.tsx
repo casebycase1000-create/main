@@ -60,8 +60,8 @@ export function AmbientBackground() {
     function draw() {
       ctx!.clearRect(0, 0, width, height);
 
-      const dotColor = isLight ? '26, 26, 26' : '139, 142, 249';
-      const lineColor = isLight ? '26, 26, 26' : '139, 142, 249';
+      const dotColor = isLight ? '80, 80, 80' : '139, 142, 249';
+      const lineColor = isLight ? '120, 120, 120' : '139, 142, 249';
       const scrollFrac = Math.min(Math.abs(scrollY) / MAX_SCROLL_PARALLAX, 1);
       const dirSign = scrollY >= 0 ? 1 : -1;
       const baseShift = scrollFrac * dirSign;
@@ -85,7 +85,7 @@ export function AmbientBackground() {
           const dy = a.y - b.y;
           const distSq = dx * dx + dy * dy;
           if (distSq < MAX_DIST_SQ) {
-            const alpha = (1 - distSq / MAX_DIST_SQ) * 0.12;
+            const alpha = (1 - distSq / MAX_DIST_SQ) * 0.25;
             ctx!.strokeStyle = `rgba(${lineColor}, ${alpha})`;
             ctx!.lineWidth = 0.5;
             ctx!.beginPath();
@@ -99,7 +99,7 @@ export function AmbientBackground() {
       for (let i = 0; i < dots.length; i++) {
         const d = dots[i];
         const parallax = baseShift * 50 * d.depth;
-        const alpha = 0.12 + d.depth * 0.28;
+        const alpha = 0.25 + d.depth * 0.45;
         ctx!.fillStyle = `rgba(${dotColor}, ${alpha})`;
         ctx!.beginPath();
         ctx!.arc(d.x, d.y + parallax, d.r, 0, Math.PI * 2);
