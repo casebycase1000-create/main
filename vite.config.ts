@@ -7,7 +7,6 @@ export default defineConfig({
   plugins: [react()],
   server: {
     hmr: false,
-    watch: null,
   },
   resolve: {
     alias: {
